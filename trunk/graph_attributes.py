@@ -1,9 +1,9 @@
 # 
 # This file is a part of the Yapgvb software package, and is 
-# licensed under the Common Public License version 1.0.  A 
+# licensed under the New BSD license.
 # `LICENSE' file should have been included with this source.
 #
-# Copyright (c) 2006 Lonnie Princehouse
+# Copyright (c) 2009 Lonnie Princehouse
 #
 
 
