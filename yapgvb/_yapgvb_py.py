@@ -256,7 +256,7 @@ class CGraph(object):
 
         for e in self._edges:
             if e._attributes:
-                print >> f, "    %s %s %s [%s];" % (e._source,arrow,e._dest,aafmt(e._attributes))
+                print >> f, "    %s %s %s [%s];" % (e._source._id,arrow,e._dest._id,aafmt(e._attributes))
             else:
                 print >> f, "    %s %s %s;" % (e._source._id,arrow,e._dest._id)
                 
