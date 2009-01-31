@@ -1,6 +1,33 @@
-Quick installation: 
+CHANGES: As of version 1.2.0, there is a pure-Python backend that does not require any compiling or screwing around with Graphviz and Boost.Python libraries.  The Boost.Python backend is still available, and is the default on Linux.  The Boost.Python backend is no longer supported on Windows.
+
+The Pure Python backend is incomplete, but it does allow for creation and rendering of graphs.
+
+
+Installation Guide
+------------------
 
 Linux:
+
+  You can use either the Pure Python or Boost.Python backends with Linux.
+
+  Also, there may be a distribution of yapgvb for your flavor of Linux.
+
+  For example, Ubuntu users can type:
+    sudo apt-get install python-yapgvb
+
+
+  I. Pure Python backend installation
+  -----------------------------------
+    
+    0. Install Graphviz
+
+    1. Edit config_linux2.py.  Change the use_boost variable to False.
+
+    2. python setup.py install   (may need to run as root)
+
+
+  II. Boost.Python backend installation
+  -------------------------------------
 
     1. make sure that boost.python and graphviz are installed.  
        graphviz must be >= version 2.6, and should be compiled as 
@@ -17,7 +44,19 @@ Linux:
 
 Windows:
 
-    1. Install graphviz.  
+    0. Install Graphviz.  Edit your PATH environment variable so that 
+       the Graphviz binaries will be found.
+
+    1. python setup.py install
+
+
+
+
+
+
+------------- DEPRECATED:  Windows Boost.Python backend installation ---------
+
+    1. Install Graphviz.
     
     2. Build boost.   
         I. Download and extract the .zip archive for boost_1_33_1 (or better)
