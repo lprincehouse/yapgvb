@@ -17,6 +17,11 @@ from distutils.core import setup
 # local configuration
 import config
 
+import sys, os
+
+parent_dir = os.path.split(os.path.split(__file__)[0])[0]
+sys.path.insert(0,parent_dir)
+
 description = """Python bindings for Graphviz, using Boost.Python."""
 
 classifiers="""
