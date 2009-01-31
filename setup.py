@@ -43,7 +43,6 @@ setup_args = dict(
     license="New BSD",
     packages = ['yapgvb','yapgvb.examples'],
     package_dir = {'yapgvb':''},
-    data_files = config.data_files,
     classifiers=filter(None, classifiers.splitlines()),
 )
 
@@ -54,6 +53,7 @@ if config.use_boost:
                              extra_link_args=config.extra_link_args,
                              include_dirs=config.include_dirs,
                              library_dirs=config.library_dirs)]
+    setup_args['data_files'] = config.data_files
 
 
 setup(**setup_args)
