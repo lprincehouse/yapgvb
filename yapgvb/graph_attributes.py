@@ -16,6 +16,7 @@ def _init_graph_attributes(G,C,N,E,S):
     # FIXME --- handle subgraph, graph correctly
     GC = (G,C)
     ENGC = ENCG = GCNE =(E,N,G,C)
+    CNE = (C,N,E)
     ENC = (E,N,C)
     ENG = (E,N,G)
     EGC = (E,G,C)
@@ -120,6 +121,7 @@ def _init_graph_attributes(G,C,N,E,S):
         'page' : (G, pointf),
         'pagedir' : (G, pagedir, pagedir.BL),
         'pencolor' : (C, color, 'black'),
+        'penwidth' : (CNE, _double),
         'peripheries' : [
             (N, _int, 0),
             (C, _int, 0),
