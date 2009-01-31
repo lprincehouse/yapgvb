@@ -1,13 +1,14 @@
 #!/usr/bin/env python
+#
 # 
 # This file is a part of the Yapgvb software package, and is 
-# licensed under the Common Public License version 1.0.  A 
-# `LICENSE' file should have been included with this source.
+# licensed under the New BSD License.
+# A `LICENSE' file should have been included with this source.
 #
-# Copyright (c) 2006 Lonnie Princehouse
+# Copyright (c) 2009 Lonnie Princehouse
 #
 #
-# This is heavily based on Daniel Holth's setup script for shoutpy, 
+# The Boost.Python part of this script is based on Daniel Holth's setup script for shoutpy, 
 # a Boost.Python binding for libshout 2: http://dingoskidneys.com/shoutpy/
 #
 
@@ -20,7 +21,7 @@ description = """Python bindings for Graphviz, using Boost.Python."""
 
 classifiers="""
 Development Status :: 3 - Alpha
-License :: OSI Approved :: Common Public License (CPL)
+License :: New BSD (see included LICENSE file)
 Operating System :: POSIX :: Linux
 Programming Language :: C++
 Programming Language :: Python
@@ -39,7 +40,7 @@ setup_args = dict(
     author="Lonnie Princehouse",
     author_email="finite.automaton@gmail.com",
     url=url,
-    license="Common Public License version 1.0",
+    license="New BSD",
     packages = ['yapgvb','yapgvb.examples'],
     package_dir = {'yapgvb':''},
     data_files = config.data_files,
