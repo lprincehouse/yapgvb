@@ -33,7 +33,7 @@ Programming Language :: Python
 Topic :: Software Development :: Libraries :: Python Modules
 """
 
-version="1.2.0"
+version="1.2.1"
 
 url = "http://sourceforge.net/projects/yapgvb"
 
