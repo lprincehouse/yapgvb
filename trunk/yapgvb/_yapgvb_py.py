@@ -36,6 +36,8 @@ def debug(f):
     def fc(*args, **keywords):
         try:
             return f(*args, **keywords)
+        except NotImplementedError,e:
+            raise e
         except Exception,e:
             import inspect
             frame = inspect.stack()[1]
@@ -102,9 +104,14 @@ class CGraph(object):
     name = property(lambda x: x._name, readonly)
     directed = property(lambda x: x._is_directed, readonly)
     strict = property(lambda x: x._is_strict, readonly)
+    _name = ""
 
     @debug
-    def __init__(self, name, graphtype):
+    def __init__(self, name_or_sourcefile, graphtype=None):
+        if graphtype is None:
+            raise NotImplementedError("Reading .dot files is not currently supported in the pure-Python backend.  You'll need to install an older version of Yapgvb that has the Boost backend.  This is temporary.  Sorry.  [If you want to help, please send the author an email!  We need a .dot parser]")
+        else:
+            name = name_or_sourcefile
         self._name = name
         if graphtype in (AGDIGRAPH, AGDIGRAPHSTRICT):
             self._is_directed = True
