@@ -181,7 +181,7 @@ splineType = splineType()
 
 pointf = AttributeType ( # FIXME - implement correctly (constraint to dim values)
     lambda s: [float, s.split(',')], 
-    lambda x: ','.join([str(float(x)) for y in x]) ,
+    lambda x: ','.join([str(float(y)) for y in x]) ,
     'point2d',
     'pointf',
 )
