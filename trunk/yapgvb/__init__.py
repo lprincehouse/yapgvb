@@ -27,7 +27,7 @@ import types, sys, os
 from graph_attributes import _init_graph_attributes, _implement_graph_attributes, GraphAttributeProperty
 from graph_attribute_types import *
 
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 __doc__ = __doc__ % locals()
 
 class SubgraphBase(object):
