@@ -129,6 +129,16 @@ class CGraph(object):
         self._next_hint = 0
 
     @debug
+    def _getnodes(self):
+        return iter(self._nodes)
+    nodes = property(_getnodes)
+
+    @debug
+    def _getedges(self):
+        return iter(self._edges)
+    edges = property(_getedges)
+
+    @debug
     def add_node(self, *node_args, **node_attrs):
         n = Node(self, *node_args, **node_attrs) 
         self._nodes.append(n)
@@ -291,6 +301,30 @@ Edges can be created through the use of overloaded operators -, <<, and >>.
         self._id = Node._id_counter
         Node._id_counter += 1
 
+    graph = property(lambda self: self._graph)
+
+    @debug
+    def _getedges(self):
+        for e in self._graph._edges:
+            if e._source == self or e._dest == self:
+                yield e
+    edges = property(_getedges)
+
+    @debug
+    def _getinedges(self):
+        for e in self._graph._edges:
+            if e._dest == self:
+                yield e
+    inbound_edges = property(_getinedges)
+
+    @debug
+    def _getoutedges(self):
+        for e in self._graph._edges:
+            if e._source == self:
+                yield e
+    outbound_edges = property(_getoutedges)
+
+
     def __get_attribute__(self,attrname):
         return self._attributes[attrname]
 
@@ -339,6 +373,10 @@ Edges are created either through the GraphBase.add_node, or by using the overloa
         self._source = n1
         self._dest = n2
         self._attributes = {}
+
+    head = property(lambda self: self._source)
+    tail = property(lambda self: self._dest)
+    graph = property(lambda self: self._source._graph)
 
     def __get_attribute__(self,name):
         return self._attributes[name]
