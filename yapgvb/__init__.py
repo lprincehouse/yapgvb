@@ -19,15 +19,17 @@ from mneumonics import *
 
 try:
     from _yapgvb import *
+    using_boost = True
 except ImportError:
     # Try the command-line backend instead
     from _yapgvb_py import *
+    using_boost = False
 
 import types, sys, os
 from graph_attributes import _init_graph_attributes, _implement_graph_attributes, GraphAttributeProperty
 from graph_attribute_types import *
 
-__version__ = '1.2.2'
+__version__ = '1.2.3'
 __doc__ = __doc__ % locals()
 
 class SubgraphBase(object):
@@ -74,13 +76,15 @@ Edges can be created through the use of overloaded operators -, <<, and >>.
     except:
         pass
 
-    Node.edges = property(_forward_iterator (Node.first_edge, Node.next_edge))
+    if using_boost:
+        Node.edges = property(_forward_iterator (Node.first_edge, Node.next_edge))
 
-    Node.outbound_edges = property(_forward_iterator (Node.first_outbound_edge, 
-        Node.next_outbound_edge))
-    Node.inbound_edges = property(_forward_iterator (Node.first_inbound_edge, 
-        Node.next_inbound_edge))
-
+        Node.outbound_edges = property(_forward_iterator (Node.first_outbound_edge, 
+            Node.next_outbound_edge))
+        Node.inbound_edges = property(_forward_iterator (Node.first_inbound_edge, 
+            Node.next_inbound_edge))
+        
+    
     Node.__str__ = lambda n: n.name
     Node.__repr__ = lambda n: '<%s "%s">' % (n.__class__.__name__, n)
     
@@ -92,7 +96,8 @@ Edges can be created through the use of overloaded operators -, <<, and >>.
     Node.__setattr__ = readonly(Node.__setattr__)
     Node.__cmp__ = __cmp__
 
-    Node.graph = property(lambda n: n.__get_graph__().__unique__(), doc="The graph to which a Node belongs.")
+    if using_boost:
+        Node.graph = property(lambda n: n.__get_graph__().__unique__(), doc="The graph to which a Node belongs.")
     
     def __lshift__(head, tail):
         """The syntax head_node << tail_node creates a directed edge between two nodes.  It is a convenient short syntax for head_node.graph.add_edge(tail_node, head_node). An Edge object is returned.  For undirected graphs, a << b is equivalent to a - b.
@@ -131,9 +136,10 @@ Edges are created either through the GraphBase.add_node, or by using the overloa
     except:
         pass
 
-    Edge.head = property(lambda e: e.__get_head__(), doc="The edge's head (source) node")
-    Edge.tail = property(lambda e: e.__get_tail__(), doc="The edge's tail (destination) node")
-    Edge.graph = property(lambda e: e.head.graph)
+    if using_boost:
+        Edge.head = property(lambda e: e.__get_head__(), doc="The edge's head (source) node")
+        Edge.tail = property(lambda e: e.__get_tail__(), doc="The edge's tail (destination) node")
+        Edge.graph = property(lambda e: e.head.graph)
     
     def __iter__(self):
         "Iterates over (tail, head)"
@@ -198,7 +204,9 @@ Edges are created either through the GraphBase.add_node, or by using the overloa
                     known[edge] = True
                     yield edge
 
-    CGraph.edges = property(iteredges, doc="An iterator of edges contained in the graph.")
+    if using_boost:
+        CGraph.edges = property(iteredges, doc="An iterator of edges contained in the graph.")
+
 
 _embellish_c_classes()
 
@@ -335,7 +343,9 @@ Process the graph with one of the layout engines supplied by Graphviz.
             outstream.close()
         return result
     
-    nodes = property(_forward_iterator(CGraph.first_node, CGraph.next_node), doc="An iterator over all nodes in the graph")
+    if using_boost:
+
+        nodes = property(_forward_iterator(CGraph.first_node, CGraph.next_node), doc="An iterator over all nodes in the graph")
 
     render.__doc__ = """
 Render the graph to a file.  layout must be called prior to rendering.
